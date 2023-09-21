@@ -82,8 +82,7 @@ void addnewtasks(){
 //function 3.
 void showlist(){  // i <  counter
 int i;
-int j;
-int swb;
+
 	 for(i=0 ; i<counter; i++){
 	 printf("_______________Show list of all tasks_______________ \n");
 	 printf("this is your id : %d\n",task[i].id);
@@ -106,9 +105,29 @@ void remov(){
 }
 //function 6.
 void Search(){
+	 int i;
+	 int uid;
 	 printf("Search for task : ");
+	 scanf("%d",&uid);
+
+	 for(i=0 ; i<counter; i++){
+	 	if(task[i].id==uid){
+	 		 printf("your task :\n");
+	 printf("this is your id : %d\n",task[i].id);
+	 printf("this is your title : %s \n",task[i].title);
+	 printf("this is your description : %s\n ",task[i].description);
+	 printf("status: %s ",task[i].status);
+	 printf("deadline : %d / %d / %d",task[i].deadline.day , task[i].deadline.month , task[i].deadline.year);	
+	 		
+
+		 }
+		   
+		 	
+		 }
+    
+	 } 
 	
-}
+
 //function 7.
 void Statistical(){
 	 printf("Statistical : ");
