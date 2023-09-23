@@ -5,7 +5,7 @@
 
 
 
-
+//global count
 int counter = 0;
  
 
@@ -33,8 +33,6 @@ struct deadline{
 //for calling a strucs.
 struct Task task[1000];
 
-//for counting how much tasks i adds.
-
 
 //functions :
 //function 1.
@@ -53,7 +51,20 @@ void Add(){
 	   printf("your description : ");
 	   gets(task[counter].description);
 	   // status
-	   strcpy(task[counter].status,"TO DO\n");
+	     // edit status
+	                int stschoice;
+	                printf("\ndo you want to edit your task to [1]DOING\t[2]DONE\t[3]TO DO  : ");
+                 	scanf("%d",&stschoice);
+                 	switch(stschoice){
+                 	case 1 :  strcpy(task[counter].status,"DOING\n");
+                 	break;
+                 	 	    
+                 	case 2 :  strcpy(task[counter].status,"DONE\n");
+                 	break;
+                 	
+                 	case 3 : strcpy(task[counter].status,"TO DO\n");
+                 	break;
+					  }
 	   	//add deadline 
        printf("type your deadline : \n");
        printf("day : ");
@@ -62,6 +73,7 @@ void Add(){
        scanf("%d",&task[counter].deadline.month);
        printf("year : ");
        scanf("%d",&task[counter].deadline.year);
+       
        
 	  
 	   counter++;
@@ -90,21 +102,101 @@ int i;
 }
 //function 3.
 void showlist(){  // i <  counter
+
 int i;
-      
-	 for(i=0 ; i<counter; i++){
+
+		 for(i=0 ; i<counter; i++){
 	 printf("_______________Show list of all tasks_______________ \n");
 	 printf("this is your id : %d\n",task[i].id);
 	 printf("this is your title : %s \n",task[i].title);
 	 printf("this is your description : %s\n ",task[i].description);
 	 printf("status: %s ",task[i].status);
-	 printf("deadline : %d / %d / %d",task[i].deadline.day , task[i].deadline.month , task[i].deadline.year);
+	 printf("deadline : %d / %d / %d\n",task[i].deadline.day , task[i].deadline.month , task[i].deadline.year);
+	 printf("the numbers of remined days is : %d \n",task[i].deadline.day);
 	 } 
-	 
+
+
 	 
 	
      
  }
+//tries alphabitique
+void alpha(){
+	
+	int i;
+    int j;
+       
+		for(i=0; i <counter; i++){
+		
+	    for(j=i+1; j<counter ; j++){
+	    	
+	      if(task[i].title[0] > task[j].title[0])	{
+	      	
+	      	 task[999]=task[i];
+	      	 task[i]=task[j];
+	      	 task[j]=task[999];
+	 
+	      	 
+		  }
+	    	
+		}
+		}	
+		int u;
+		for(u=0 ; u<counter ; u++){
+	 printf("_______________Show list of all tasks_______________ \n");
+	 printf("this is your id : %d\n",task[u].id);
+	 printf("this is your title : %s \n",task[u].title);
+	 printf("this is your description : %s\n ",task[u].description);
+	 printf("status: %s ",task[u].status);
+	 printf("deadline : %d / %d / %d\n",task[u].deadline.day , task[u].deadline.month , task[u].deadline.year);
+	 } 
+}
+// tries deadline
+void deadlines(){
+		int i;
+        int j;
+        //compare between days to give the closest one.
+		for(i=0; i <counter; i++){
+		
+	    for(j=i+1; j<counter ; j++){
+	    	
+	      if(task[i].deadline.day > task[j].deadline.day){
+	      	
+	      	 task[999]=task[i];
+	      	 task[i]=task[j];
+	      	 task[j]=task[999];
+            }
+                        
+        }
+    }       
+                	int u;
+		for(u=0 ; u<counter ; u++){
+	 printf("_______________Show list of all tasks_______________ \n");
+	 printf("this is your id : %d\n",task[u].id);
+	 printf("this is your title : %s \n",task[u].title);
+	 printf("this is your description : %s\n ",task[u].description);
+	 printf("status: %s ",task[u].status);
+	 printf("deadline : %d / %d / %d\n",task[u].deadline.day , task[u].deadline.month , task[u].deadline.year);
+	 } 
+}
+// deadline 3 jour at lest
+void dead(){
+	int i;
+	for(i=0; i<counter; i++){
+		if(task[i].deadline.day <=3){
+			
+			printf("_______________Show list of all tasks_______________ \n");
+	 printf("this is your id : %d\n",task[i].id);
+	 printf("this is your title : %s \n",task[i].title);
+	 printf("this is your description : %s\n ",task[i].description);
+	 printf("status: %s ",task[i].status);
+	 printf("deadline : %d / %d / %d\n",task[i].deadline.day , task[i].deadline.month , task[i].deadline.year);
+			
+		}
+		
+	}
+	
+}
 //function 4.
 void edit(){
 	
@@ -112,7 +204,7 @@ void edit(){
 	 int uid;
 	 char titlename[30];
 	 int searchchoice;
-	 int stschoice;
+	 
 	            //start code of edit
 	            printf("Edit a task : \n");
 	            //here we search for task so we can edited
@@ -142,14 +234,7 @@ void edit(){
 	                gets(task[uid-1].description);
 	                
 	                
-	                // edit status
-	                printf("\ndo you want to edit your task to [1]DOING\t[2]DONE : ");
-                 	scanf("%d",&stschoice);
-                 	switch(stschoice){
-                 	case 1 :  strcpy(task[uid-1].status,"DOING\n");
-                 	 	    
-                 	case 2 :  strcpy(task[uid-1].status,"DONE\n");
-					  }
+	            
 	             	//edit  deadline 
                     printf("\nedit your deadline : \n");
                     printf("\nday : ");
@@ -159,6 +244,20 @@ void edit(){
                     printf("\nyear : ");
                     scanf("%d",&task[uid-1].deadline.year);
                    
+                      // edit status
+	                int stschoice;
+	                printf("\ndo you want to edit your task to [1]DOING\t[2]DONE\t[3]TO DO: ");
+                 	scanf("%d",&stschoice);
+                 	switch(stschoice){
+                 	case 1 :  strcpy(task[uid-1].status,"DOING\n");
+                 	break;
+                 	 	    
+                 	case 2 :  strcpy(task[uid-1].status,"DONE\n");
+                 	break;
+                 	
+                 	case 3 : strcpy(task[uid-1].status,"TO DO\n");
+                 	break;
+					  }
        	          	
     	
 	}
@@ -242,11 +341,25 @@ void Search(){
 
 //function 7.
 void Statistical(){
-	
+
 	 printf("Statistical : \n");
-	 printf("\nthe number of all tasks is : %d",counter);
+	 printf("\nthe number of all tasks is : %d\n",counter);
+	
+}
+//done and doing
+void bysts(){
+		int i;
+	 int done=0;
+     for(i=0 ; i<counter; i++){
+     	if(strcmp(task[i].status , "DONE\n")==0){
+     		 done++;
+     		
+		 }
+     	
+	 }
 	 
-	 
+	 printf("the numbers of tastk that done is : %d\n",done);
+	 printf("the numbers of the tasks that todo and doing is : %d\n",counter-done);
 }
 
 int main(){
@@ -256,17 +369,21 @@ int main(){
 do{    
 // menu of tastk :                 
 	    printf("\t\t\t______________________________________________________\n");
-        printf("\t\t\t                    TODO LIST MENU            \n");
-        printf("\t\t\t______________________________________________________\n");
-        printf("\t\t\t          [1] Add a new task.  \n");
-        printf("\t\t\t          [2] Add several new tasks. \n");
-        printf("\t\t\t          [3] Show list of all tasks. \n");
-        printf("\t\t\t          [4] Edit a task. \n");
-        printf("\t\t\t          [5] Remove a task.  \n");
-        printf("\t\t\t          [6] Search for task. \n");
-        printf("\t\t\t          [7] Statistical \n");
-        printf("\t\t\t          [0] to leave. \n");
-        printf("\t\t\t______________________________________________________\n");
+        printf("\t\t\t|                   TODO LIST MENU                    |\n");
+        printf("\t\t\t|_____________________________________________________|\n");
+        printf("\t\t\t|         [1] Add a new task.  \n");          
+        printf("\t\t\t|         [2] Add several new tasks. \n");
+        printf("\t\t\t|         [3] Show list of all tasks. \n");
+        printf("\t\t\t|         [4] Edit a task. \n");
+        printf("\t\t\t|         [5] Remove a task.  \n");
+        printf("\t\t\t|         [6] Search for task. \n");
+        printf("\t\t\t|         [7] Statistical \n");
+        printf("\t\t\t|         [8] by alphabitic \n");
+        printf("\t\t\t|         [9] by deadline \n");
+        printf("\t\t\t|         [10] sts by done \n");
+        printf("\t\t\t|         [11] deadline by 3 days  \n");
+        printf("\t\t\t|         [0] to leave. \n");
+        printf("\t\t\t|_____________________________________________________\n");
         printf("type your choice [0-7] : ");
         scanf("\t%d",&choice);
         system("cls");
@@ -297,6 +414,18 @@ do{
         	case 7: Statistical();
         	break;
         	
+        	case 8: alpha();
+        	break;
+        	
+        	case 9: deadlines();
+        	break;
+        	
+        	case 10: bysts();
+        	break;
+        	
+        	case 11: dead();
+        	break;
+        	
         	case 0: printf("you leave the menu list!\n");
         	break;
         	
@@ -310,6 +439,6 @@ while(choice!=0);
 
 	
 	
-	
+//i hope my code have been good to see it :) 	
 }
 
