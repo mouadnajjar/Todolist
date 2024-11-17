@@ -131,6 +131,6 @@ Contributions to this project are welcome! If you would like to contribute:
 4. Commit your changes and push them to your fork.
 5. Open a pull request for review.
 
-Please ensure that your changes follow the project's coding style and pass any tests (if applicable).
+
 
 ---
